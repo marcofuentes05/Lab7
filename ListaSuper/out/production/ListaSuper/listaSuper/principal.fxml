@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listaSuper.Controller">
+   <children>
+      <Button fx:id="newListButton" layoutX="468.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleNewListButtonAction" prefHeight="52.0" prefWidth="110.0" text="Nueva Lista">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label layoutX="72.0" layoutY="48.0" prefHeight="60.0" prefWidth="306.0" text="Mis Listas">
+         <font>
+            <Font name="Arial" size="53.0" />
+         </font></Label>
+      <Button fx:id="deleteButton" layoutX="475.0" layoutY="325.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="92.0" text="Eliminar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editButton" layoutX="379.0" layoutY="325.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="84.0" text="Editar" />
+      <TableView fx:id="listTable" layoutX="14.0" layoutY="125.0" prefHeight="190.0" prefWidth="563.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="225.0" text="Nombre" />
+          <TableColumn fx:id="dateColumn" prefWidth="116.0" text="Fecha" />
+            <TableColumn fx:id="amountColumn" prefWidth="123.0" text="Pendientes" />
+            <TableColumn fx:id="prizeColumn" prefWidth="92.0" text="Estimado" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
