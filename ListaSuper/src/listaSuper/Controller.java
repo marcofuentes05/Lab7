@@ -13,7 +13,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import java.time.LocalDate;
 import javafx.stage.StageStyle;
+
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -34,12 +37,14 @@ public class Controller {
     @FXML
     TableColumn amountColumn;
 
+    LocalDate date =java.time.LocalDate.now();
     @FXML
     public void initialize(){
+
         ObservableList<ShoppingList> list = FXCollections.observableArrayList(
-                new ShoppingList("Mercado","14-5-14"),
-                new ShoppingList("Walmart","22-8-2018"),
-                new ShoppingList("Utiles","1-1-18")
+                new ShoppingList("Mercado",date,""),
+                new ShoppingList("Walmart",date,""),
+                new ShoppingList("Utiles",date,"")
         );
         nameColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("name"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("date"));
@@ -47,19 +52,25 @@ public class Controller {
         amountColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("name"));
 
         listTable.setItems(list);
-
     }
 
     @FXML
-    void handleNewListButtonAction (ActionEvent event){
+    public void handleNewListButtonAction (ActionEvent event){
+        System.out.println("JAJAJA SLU2");
+        Parent root;
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("newList.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("newList.fxml"));
+            root = loader.load();
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.DECORATED); // o puede ser UNDECORATED
             stage.setTitle("Nueva Lista");
-            stage.setScene(new Scene(root1));
+            stage.setScene(new Scene(root, 450, 450));
             stage.show();
-        }catch(Exception e){}
+            System.out.println("no error :D");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void createActionHandler (ActionEvent e){
+
     }
 }

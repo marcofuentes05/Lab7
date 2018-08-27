@@ -1,6 +1,8 @@
 package listaSuper;
 
+import clases.ShoppingList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,27 +14,34 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDate;
+
+import static listaSuper.Main.lista;
+
 public class NewListController {
     @FXML
     Button backButton;
     @FXML
     TextField nameField;
     @FXML
-    TextArea descriptionField;
+    TextArea description;
     @FXML
     Button newListButton;
-/*
-    @FXML
-    void backButtonActionHandle(ActionEvent event){
+    public void backButtonActionHandle (Event e){
         try{
-            FXMLLoader fxmlloader  = new FXMLLoader(getClass().getResource("newList.fxml"));
-            Parent root1 = (Parent) fxmlloader.load();
-            Stage stage= new Stage();
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Nueva Lista");
-            stage.setScene(new Scene(root1));
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        }catch(Exception e){}
 
-    }*/
+        }catch(Exception e1){}
+    }
+    public void createButtonActionHandle(ActionEvent e){
+        try{
+            if(nameField.getText()!=null){
+                if(description.getText()!=null){
+                    String name = nameField.getText();
+                    String des = description.getText();
+                    LocalDate date = java.time.LocalDate.now();
+                    lista.add(new ShoppingList(name,date,des));
+                }
+            }
+        }catch(Exception e2){}
+    }
 }

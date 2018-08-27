@@ -1,18 +1,21 @@
 package clases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingList {
     private String name;
-    private String date;
+    private LocalDate date;
+    private String descripcion;
     private ArrayList<ShoppingItem> list;
 
     public ShoppingList(){}
 
-    public ShoppingList(String n, String f){
+    public ShoppingList(String n, LocalDate f, String d){
         this.name=n;
         this.date= f;
+        this.descripcion=d;
         this.list= new ArrayList<>();
     }
 
@@ -20,7 +23,7 @@ public class ShoppingList {
         return name;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

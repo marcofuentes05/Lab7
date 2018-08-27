@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listaSuper.Controller">
+<AnchorPane minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listaSuper.Controller">
    <children>
       <Button fx:id="newListButton" layoutX="468.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleNewListButtonAction" prefHeight="52.0" prefWidth="110.0" text="Nueva Lista">
          <font>
