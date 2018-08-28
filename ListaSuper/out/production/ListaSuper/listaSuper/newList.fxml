@@ -29,7 +29,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id= "description" layoutX="129.0" layoutY="201.0" prefHeight="131.0" prefWidth="439.0" />
+      <TextField fx:id= "descriptionField" layoutX="129.0" layoutY="201.0" prefHeight="131.0" prefWidth="439.0" />
       <Button fx:id="newListButton" layoutX="501.0" layoutY="343.0" mnemonicParsing="false" text="Crear">
          <font>
             <Font size="18.0" />

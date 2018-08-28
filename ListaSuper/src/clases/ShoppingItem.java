@@ -1,5 +1,7 @@
 package clases;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class ShoppingItem {
     private String name;
     private int amount;

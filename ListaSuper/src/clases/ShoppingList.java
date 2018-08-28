@@ -1,5 +1,9 @@
 package clases;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +12,13 @@ public class ShoppingList {
     private String name;
     private LocalDate date;
     private String descripcion;
-    private ArrayList<ShoppingItem> list;
-
-    public ShoppingList(){}
+    private ObservableList<ShoppingItem> list;
 
     public ShoppingList(String n, LocalDate f, String d){
         this.name=n;
         this.date= f;
         this.descripcion=d;
-        this.list= new ArrayList<>();
+        this.list= FXCollections.observableArrayList();
     }
 
     public String getName() {
@@ -27,7 +29,7 @@ public class ShoppingList {
         return date;
     }
 
-    public ArrayList<ShoppingItem> getList() {
+    public ObservableList<ShoppingItem> getList() {
         return list;
     }
 }

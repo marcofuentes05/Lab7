@@ -1,5 +1,6 @@
 package listaSuper;
 
+import clases.ShoppingItem;
 import clases.ShoppingList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +38,8 @@ public class Controller {
     @FXML
     TableColumn amountColumn;
 
+
+
     LocalDate date =java.time.LocalDate.now();
     @FXML
     public void initialize(){
@@ -70,7 +73,52 @@ public class Controller {
             e.printStackTrace();
         }
     }
-    public void createActionHandler (ActionEvent e){
+
+    @FXML
+    public void editActionHandler (ActionEvent e){
+        Parent root;
+        try{
+            if (listTable.getSelectionModel().getSelectedItem() != null){
+                ShoppingList selectedList = listTable.getSelectionModel().getSelectedItem();
+
+                String name = this.listTable.getSelectionModel().getSelectedItem().getName();
+                System.out.println(name);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("myList.fxml"));
+                root = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Editor");
+                stage.setScene(new Scene(root, 600, 400));
+
+                MyListController myListController = loader.getController();
+
+                myListController.setTitle(selectedList.getName());
+
+                MyListController.initTable(selectedList);
+
+                stage.show();
+
+            }else{
+                System.out.println("Mano! No seleccionaste nada");
+            }
+        }catch(Exception e0){e0.printStackTrace();}
+    }
+
+    @FXML
+    public void deleteActionHandler (ActionEvent e){
+        try{
+            System.out.println("Eliminando...");
+            System.out.println(this.listTable.getSelectionModel().getSelectedItem().getName());
+            int index = this.listTable.getSelectionModel().getSelectedIndex();
+            Main.lista.remove(index);
+            System.out.println("Eliminado!");
+            for(int a =0;a<Main.lista.size();a++){
+                System.out.println(Main.lista.get(a).getName());
+            }
+            //TODO Ver el metodo eliminar...
+        }catch(Exception e4){
+            System.out.println("Algo salió mal... \nPuede ser que no hayas seleccoinado nada...");
+            //e4.printStackTrace();
+        }
 
     }
 }
