@@ -11,7 +11,7 @@
    <children>
       <Label fx:id="nameLabel" layoutX="150.0" layoutY="27.0" text="Mi Lista de">
          <font>
-            <Font size="36.0" />
+            <Font size="24.0" />
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" text="A mis listas">
