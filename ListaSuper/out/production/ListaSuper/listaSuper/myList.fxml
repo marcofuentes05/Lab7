@@ -11,26 +11,26 @@
    <children>
       <Label fx:id="nameLabel" layoutX="150.0" layoutY="27.0" text="Mi Lista de">
          <font>
-            <Font size="36.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" text="A mis listas">
+      <Button fx:id="backButton" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" onAction="#backButtonActionHandle" text="A mis listas">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="addButton" layoutX="436.0" layoutY="34.0" mnemonicParsing="false" text="Agregar Artículo">
+      <Button fx:id="addButton" layoutX="436.0" layoutY="34.0" mnemonicParsing="false" onAction="#addButtonAction" text="Agregar Artículo">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TableView layoutX="36.0" layoutY="100.0" prefHeight="208.0" prefWidth="555.0">
+      <TableView fx:id="itemsTable" layoutX="36.0" layoutY="100.0" prefHeight="208.0" prefWidth="555.0">
         <columns>
           <TableColumn fx:id="articleColumn" prefWidth="193.0" text="Artículo" />
-          <TableColumn prefWidth="88.0" text="Cantidad" />
+          <TableColumn fx:id="amountColumn" prefWidth="88.0" text="Cantidad" />
             <TableColumn fx:id="perUnitColumn" prefWidth="87.0" text="Unitario" />
             <TableColumn fx:id="totalColumn" prefWidth="87.0" text="Total" />
-            <TableColumn fx:id="StateColumn" prefWidth="99.0" text="Estado" />
+            <TableColumn fx:id="stateColumn" prefWidth="99.0" text="Estado" />
         </columns>
       </TableView>
       <Label layoutX="279.0" layoutY="331.0" text="Marcar como:">
@@ -38,8 +38,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="pendingButton" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" text="Pendiente" />
-      <Button layoutX="500.0" layoutY="332.0" mnemonicParsing="false" text="Comprado" />
-      <Label layoutX="57.0" layoutY="369.0" text="Total Pendiente: " />
+      <Button fx:id="pendingButton" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" onAction="#setPendingButtonAction" text="Pendiente" />
+      <Button fx:id="setBoughtButton" layoutX="500.0" layoutY="332.0" mnemonicParsing="false" onAction="#setBoughtButtonAction" text="Comprado" />
+      <Label fx:id="totalPendingLabel" layoutX="57.0" layoutY="369.0" text="Total Pendiente: " />
    </children>
 </AnchorPane>

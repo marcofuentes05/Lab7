@@ -1,23 +1,19 @@
 package clases;
 
-import javafx.beans.property.SimpleStringProperty;
 
 public class ShoppingItem {
     private String name;
-    private int amount;
+    private Integer amount;
     private double prizeU;
-    private double totalPrize;
-    private boolean state;
+    private double prizeT;
+    private Boolean state;
 
-    public ShoppingItem(){
-
-    }
-    public ShoppingItem(String n , int a, double p, double t, boolean s){
+    public ShoppingItem(String n , int a, double p){
         this.name=n;
         this.amount= a;
         this.prizeU= p;
-        this.totalPrize=t;
-        this.state=s;
+        this.prizeT=a*p;
+        this.state=false;
     }
 
     public String getName() {
@@ -32,11 +28,31 @@ public class ShoppingItem {
         return prizeU;
     }
 
-    public double getTotalPrize() {
-        return totalPrize;
+    public double getPrizeT() {
+        double p ;
+        if(state){
+            p=0;
+        }else{
+            p=prizeT;
+        }
+        return p;
     }
 
-    public boolean isState() {
+    public String getState() {
+        String estado;
+        if (state) {
+            estado = "Comprado";
+        }else{
+            estado = "Pendiente";
+        }
+        return estado;
+    }
+    public Boolean isState(){
         return state;
+    }
+
+
+    public void setState(Boolean b){
+        this.state = b;
     }
 }

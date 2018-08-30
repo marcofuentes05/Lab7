@@ -15,9 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.time.LocalDate;
-import javafx.stage.StageStyle;
-
-import java.util.ArrayList;
+import java.util.Date;
 
 public class Controller {
 
@@ -37,38 +35,50 @@ public class Controller {
     TableColumn prizeColumn;
     @FXML
     TableColumn amountColumn;
+    static ShoppingList selectedList;
 
 
+    public  TableView <ShoppingList> getListTable(){
+        return listTable;
+    }
 
-    LocalDate date =java.time.LocalDate.now();
+
+    void refreshTableView(){
+        getListTable().getColumns().get(0).setVisible(false);
+        getListTable().getColumns().get(0).setVisible(true);
+    }
     @FXML
     public void initialize(){
+        for (int i = 0;i<Main.getMainList().size();i++){
+            Main.getMainList().get(i).refresh();
+        }
 
-        ObservableList<ShoppingList> list = FXCollections.observableArrayList(
-                new ShoppingList("Mercado",date,""),
-                new ShoppingList("Walmart",date,""),
-                new ShoppingList("Utiles",date,"")
-        );
         nameColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("name"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("date"));
-        prizeColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("name"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,String>("name"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,Date>("date"));
+        prizeColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,Double>("prize"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<ShoppingList,Integer>("pendingItems"));
 
-        listTable.setItems(list);
+        refreshTableView();
+
+        listTable.setItems(Main.getMainList());
     }
 
     @FXML
     public void handleNewListButtonAction (ActionEvent event){
-        System.out.println("JAJAJA SLU2");
         Parent root;
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("newList.fxml"));
             root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Nueva Lista");
-            stage.setScene(new Scene(root, 450, 450));
+            stage.setScene(new Scene(root, 600, 400));
             stage.show();
-            System.out.println("no error :D");
+
+
+            // get a handle to the stage
+            Stage stage0 = (Stage) newListButton.getScene().getWindow();
+            // do what you have to do
+            stage0.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -79,40 +89,46 @@ public class Controller {
         Parent root;
         try{
             if (listTable.getSelectionModel().getSelectedItem() != null){
-                ShoppingList selectedList = listTable.getSelectionModel().getSelectedItem();
+                selectedList = listTable.getSelectionModel().getSelectedItem();
 
-                String name = this.listTable.getSelectionModel().getSelectedItem().getName();
-                System.out.println(name);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("myList.fxml"));
                 root = loader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Editor");
                 stage.setScene(new Scene(root, 600, 400));
-
                 MyListController myListController = loader.getController();
-
+                myListController.setSelectedList(selectedList);
                 myListController.setTitle(selectedList.getName());
-
-                MyListController.initTable(selectedList);
-
                 stage.show();
 
+                // get a handle to the stage
+                Stage stage0 = (Stage) editButton.getScene().getWindow();
+                // do what you have to do
+                stage0.close();
             }else{
                 System.out.println("Mano! No seleccionaste nada");
             }
-        }catch(Exception e0){e0.printStackTrace();}
+        }catch(Exception e0){e0.getCause();}
     }
+
+    public static ShoppingList getSelectedList(){
+        return selectedList;
+    }
+
+
 
     @FXML
     public void deleteActionHandler (ActionEvent e){
         try{
+
             System.out.println("Eliminando...");
             System.out.println(this.listTable.getSelectionModel().getSelectedItem().getName());
+
             int index = this.listTable.getSelectionModel().getSelectedIndex();
-            Main.lista.remove(index);
+            Main.getMainList().remove(index);
             System.out.println("Eliminado!");
-            for(int a =0;a<Main.lista.size();a++){
-                System.out.println(Main.lista.get(a).getName());
+            for(int a =0;a<Main.getMainList().size();a++){
+                System.out.println(Main.getMainList().get(a).getName());
             }
             //TODO Ver el metodo eliminar...
         }catch(Exception e4){
@@ -120,5 +136,16 @@ public class Controller {
             //e4.printStackTrace();
         }
 
+    }
+
+    @FXML
+    public ShoppingList getSelectedItem(){
+        ShoppingList item;
+        if (listTable.getSelectionModel().getSelectedItem() != null){
+            item = listTable.getSelectionModel().getSelectedItem();
+        }else{
+            item = null;
+        }
+        return item;
     }
 }

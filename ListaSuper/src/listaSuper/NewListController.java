@@ -17,8 +17,6 @@ import javafx.stage.StageStyle;
 
 import java.time.LocalDate;
 
-import static listaSuper.Main.lista;
-
 public class NewListController {
     @FXML
     Label nameLabel;
@@ -27,7 +25,7 @@ public class NewListController {
     @FXML
     TextField nameField;
     @FXML
-    TextArea description;
+    TextField description;
     @FXML
     Button newListButton;
     @FXML
@@ -37,19 +35,66 @@ public class NewListController {
             Stage stage = (Stage) backButton.getScene().getWindow();
             // do what you have to do
             stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("principal.fxml"));
+            Parent root = loader.load();
+            Stage stage0 = new Stage();
+            stage0.setTitle("Control de Listas de Compras");
+            stage0.setScene(new Scene(root, 600, 400));
+
+            stage0.show();
+
         }catch(Exception e1){}
     }
+
+    public static ShoppingList getSelectedList(){
+        int index = Main.getMainList().size()-1;
+        ShoppingList selectedONE = Main.getMainList().get(index);
+        return selectedONE;
+    }
+
     @FXML
-    public void createButtonActionHandle(ActionEvent e){
+    public void createButtonActionHandle(Event e){
+
         try{
-            if(nameField.getText()!=null){
-                if(description.getText()!=null){
-                    String name = nameField.getText();
-                    String des = description.getText();
-                    LocalDate date = java.time.LocalDate.now();
-                    lista.add(new ShoppingList(name,date,des));
-                }
+            if(nameField.getText()!= ""){
+                /*if(description.getText()!= ""){*/
+                String name = nameField.getText();
+                String des = "asdf";
+                LocalDate date = java.time.LocalDate.now();
+                Main.getMainList().add(new ShoppingList(name,date,des));
+                int ultimo = Main.getMainList().size();
+
+                Main.getMainList().get(ultimo-1).refresh();
+                /*}else{
+                    System.out.println("Has dejado campos en blanco...");
+                }*/
+
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("myList.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    stage.setTitle("Editor");
+                    stage.setScene(new Scene(root, 600, 400));
+                    MyListController myListController = loader.getController();
+                    ShoppingList selectedList = Main.getMainList().get(ultimo-1);
+                    myListController.setSelectedList(selectedList);
+
+                    myListController.setTitle(selectedList.getName());
+                    stage.show();
+                }catch(Exception z){}
+
+
+                // get a handle to the stage
+                Stage stage0 = (Stage) newListButton.getScene().getWindow();
+                // do what you have to do
+                stage0.close();
+
+            }else{
+                System.out.println("Has dejado campos en blanco...");
             }
-        }catch(Exception e2){}
+        }catch(Exception e2){
+            System.out.println(e2.getCause());
+        }
     }
 }
